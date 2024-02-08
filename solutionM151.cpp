@@ -1,4 +1,4 @@
-
+// My Solution to the problem 
   class Solution {
 public:
     string reverseWords(string s) {
@@ -25,3 +25,23 @@ public:
         
     }
 };  
+
+// Enhanced solution ot the problem
+class Solution {
+public:
+    string reverseWords(string s) {
+        istringstream iss(s);
+        string word;
+        string reversedString;
+        int loop=0;
+    while (iss >> word) {
+        if (!reversedString.empty()) {
+            reversedString = word + " " + reversedString;
+        } else {
+            reversedString = word;
+        }
+    }
+
+    return reversedString;
+    }
+};
