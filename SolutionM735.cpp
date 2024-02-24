@@ -81,3 +81,41 @@ public:
     }
 };
 
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        int ind = -1;
+        vector<int> v1;
+
+        for(auto curr : asteroids){
+            if(v1.size()>0){
+                if(v1.back() * curr <0){
+                    if(abs(v1.back()) == abs(curr)){
+                        // cout<<" curr and next elemet are of diff sign so removal of elemet "<<v1.back()<<" becaosue curr is "<<curr<<endl;
+                        v1.pop_back();
+                    }
+                    else{
+                        while( abs(curr)> abs(v1.back()) && v1.size()>0){
+                            // cout<<" The curr and next elemet are of differnt type so removing back ele : "<<v1.back()<<" beacuse of "<<curr<<endl;
+                            v1.pop_back();
+                        }
+                        // cout<<" Finalyy adding cuur after diff signs "<<curr<<endl;
+                        if(abs(curr)>v1.back() || v1.size() == 0)
+                            v1.push_back(curr);
+                    }
+                }
+                else{
+                    v1.push_back(curr);
+                // cout<<"Both curr and last elemetn are of same sign so addtion of "<<curr<<endl;
+
+                }
+            }
+            else{
+                v1.push_back(curr);
+                // cout<<"NO element so additon of 0th element "<<curr<<endl;
+            }
+        }
+
+        return v1;
+    }
+}; //approach using vector (logicaol is not clear to me i guess)
