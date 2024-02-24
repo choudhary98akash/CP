@@ -12,59 +12,55 @@ class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
         
-        if(head == NULL || head ->next == NULL)
+        if(!head || !head->next){
             return head;
-
-        ListNode* odd = head;
-        ListNode* eve = head->next;
-        ListNode* temp = head;
-        int counter =1;
-        while(temp){
-            cout<<"Current node "<<temp->val<<endl;
-            temp = temp->next;
-            if(counter%2 == 1){
-                if(odd){
-                    cout<<"This is odd node "<<odd->val;
-                    eve = odd->next;
-                    if(eve){
-                    cout<<" next of odd is "<<eve->val;
-                    odd->next = eve->next;
-                    if(odd->next)
-                    cout<<" odd next is now "<<eve->next->val<<endl;
-                    }
-                }
-            }
-            else{
-                if(eve){
-                    cout<<" This node is eve "<<eve->val;
-                    odd = eve->next;
-                    cout<<" next to eve is "<<odd->val;
-                    if(odd)
-                    eve->next = odd->next;
-                    if(eve->next)
-                    cout<<": new eve next is "<<eve->next->val<<endl;
-                }
-            }
-            counter++;
-            ListNode* tempe = head->next;
-            cout<<"Even list ";
-            while(tempe){
-                cout<<" "<<tempe->val;
-                tempe = tempe->next;
-            }
-            cout<<endl;
-            ListNode* tempo = head;
-            cout<<"Odd list ";
-            while(tempo){
-                cout<<" "<<tempo->val;
-                tempo = tempo->next;
-            }
-            cout<<endl;
         }
 
-        odd->next = head->next;
-        
-        return odd;
-        
+        ListNode* odd = head;
+        ListNode* odd2 = head;
+        ListNode* eve = head->next;
+        ListNode* eve2 = head->next;
+        ListNode* temp = head;
+        int counter = 1;
+
+        while(temp){
+            temp = temp->next;
+
+            if(counter%2==0){
+                if(eve){
+                odd = eve->next;
+                }
+                if(odd){
+                    if(odd->next){
+                        eve->next  = odd->next;
+                    }
+                    else
+                        eve->next = nullptr;
+                }
+                cout<<endl;
+
+
+            }
+            else{
+                if(odd){
+                eve = odd->next;
+                }
+                if(eve){
+                    if(eve->next){
+                        odd->next = eve->next;
+                    }
+                    else
+                        odd->next = nullptr; 
+                }
+                if(odd && odd->next==nullptr)
+                    odd2 = odd;
+                cout<<endl;
+            }
+
+
+        counter++;
+        }
+        odd2->next = eve2;
+        return head;
     }
-};  //30 +min 1 soluttion (Sanitization error)
+};
