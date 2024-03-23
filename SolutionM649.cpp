@@ -86,3 +86,88 @@ public:
 };
 
 // making it too much complex - 5/82
+
+class Solution {
+public:
+    string predictPartyVictory(string senate) {
+        int R = 0;
+        int D =0;
+        queue<char> q;
+
+        bool flag = true;
+
+            q.push(senate[0]);
+            if(q.front() == 'R'){
+                R++;
+                D--;
+                cout<<"Pushed R "<<" and the count of R is "<<R<<" and D is "<<D<<endl;
+            }
+            else{
+                D--;
+                R++;
+                cout<<"Pushed D "<<" and the count of D is "<<D<<" and R is "<<R<<endl;
+            }
+
+        while(flag){
+
+            int size = senate.size();
+            for(int i =1; i<size;i++){
+                char c = senate[i];
+                if(c!=q.back()){
+                    if(c == 'R' and R<=0){
+                        R++;
+                    }else{
+                        q.push(c);
+                        R++;
+                        D--;
+                        cout<<"Pushed R "<<" and the count of R is "<<R<<" and D is "<<D<<" and poping "<<q.front()<<endl;
+                        q.pop();
+                    }
+
+                    if(c == 'D' and D<=0){
+                        D++;
+                    }else{
+                        q.push(c);
+                        R--;
+                        D++;
+                        cout<<"Pushed D "<<" and the count of D is "<<D<<" and R is "<<R<<" and poping "<<q.front()<<endl;
+                        q.pop();
+                    }
+
+                }
+                else{
+                    if(c == 'R'){
+                        R++;
+                        D--;
+                    }
+                    else{
+                        R--;
+                        D++;
+                    }
+                    cout<<" Pushing "<<c<<" and count of R is "<<R<<" and the count of D is "<<D<<endl;
+                    q.push(c);
+                }
+            }
+            string temp = "";
+            while(!q.empty()){
+                temp +=q.front();
+                q.pop();
+            }
+            senate = temp;
+            cout<<"Updated senate  : "<<senate<<endl;
+
+            if(R<=0 || D<=0){
+                flag = false;
+            }
+
+
+
+        }
+            if(R>D){
+                return "Radiant";
+            }
+
+
+        return "Dire";
+    }
+};//unfruitfull solution 
